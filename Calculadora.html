@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title> Calculadora Básica</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+        <div class="calculadora">
+            <h2>Operaciones básicas</h2>
+            <br>
+            <label>Número 1: <input type="number" id="num1"></label><br>
+            <label>Número 2: <input type="number" id="num2"></label><br><br>
+            <button onclick="realizarOperacion('suma')"> Sumar </button>
+            <button onclick="realizarOperacion('resta')"> Restar </button>
+            <button onclick="realizarOperacion('multiplicacion')"> Multiplicación </button>       
+            <button onclick="realizarOperacion('division')"> División </button>            
+            
+            <p id="resultado"></p>
+            <p id="error"></p>
+       </div>
+
+
+      <script>
+        function realizarOperacion(op){
+              const a = parseFloat(document.getElementById("num1").value);
+              const b = parseFloat(document.getElementById("num2").value);
+              const resultadoDiv = document.getElementById("resultado");
+              const errorDiv = document.getElementById("error");
+              
+              let resultado;
+
+              //LIMPIAR MENSAJES
+              resultadoDiv.textContent = "";
+              errorDiv.textContent = "";
+              
+              //DEFINICIÓN DE QUE OPERACION DEBE LLAMAR LA FUNCION
+                if(op==="suma"){
+                    resultado= suma(a,b);
+                }
+                else{  
+                    if(op==="resta"){
+                        resultado = resta(a,b);
+                    }
+                    else{
+                        if(op==="multiplicacion"){
+                            resultado = multiplicacion(a,b);
+                        }
+                        else{
+                            if(op==="division"){
+                                resultado = division(a,b);                              
+                            }
+                        }
+                    }
+                }
+
+                //MOSTRAR EL RESULTADO DE LA OPERACION
+                if(resultado !== undefined){
+                        resultadoDiv.textContent = "Resultado: " + resultado;
+                }
+
+                ///DEFINICION DE FUNCIONES
+                function suma(a,b){
+                    return a + b;
+                }
+
+                function resta(a,b){
+                    return a - b;
+                }
+                
+                function multiplicacion(a,b){
+                    return a * b;
+                }
+
+                function division(a,b){
+                    try{ 
+                        if(b===0){
+                            throw new Error("El valor de división debe ser diferente a 0");
+                        }
+                        else{
+                            return a/b;
+                        }   
+                    } catch (error) {
+                        errorDiv.textContent = "Error: " + error.message;
+                    }
+                }          
+        }
+      </script>   
+            
+  </body>
+</html>
